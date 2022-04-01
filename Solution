@@ -1,0 +1,37 @@
+using System;
+using System.Linq;
+using System.Numerics;
+using System.Text;
+using System.Collections.Generic;
+using System.Collections;
+
+
+namespace AssociativeArrays
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int num = int.Parse(Console.ReadLine());
+
+            Dictionary<string, List<double>> result = new Dictionary<string, List<double>>();
+
+            for (int i = 1; i <= num; i++)
+            {
+                string name = Console.ReadLine();
+                double grade = double.Parse(Console.ReadLine());
+
+                if (!result.ContainsKey(name))
+                {
+                    result.Add(name, new List<double>());
+                }
+                result[name].Add(grade);
+            }
+
+            foreach(var kvp in result.Where(x => x.Value.Average(x => x) >= 4.50))
+            {
+                Console.WriteLine($"{kvp.Key} -> {(kvp.Value.Average(x => x)):f2}");
+            }
+        }
+    }
+}
